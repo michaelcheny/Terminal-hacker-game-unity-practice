@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
+
+    // Game State
+    int level;
+    enum Screen { MainMenu, Password, Win }
+
+    Screen currentScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +19,7 @@ public class Hacker : MonoBehaviour
 
     void ShowMainMenu(string greeting = "Plankton")
     {
+        currentScreen = Screen.MainMenu;
         Terminal.ClearScreen();
         Terminal.WriteLine("Hello Master " + greeting);
         Terminal.WriteLine("");
@@ -26,48 +34,60 @@ public class Hacker : MonoBehaviour
 
     void OnUserInput(string input)
     {
-        if (input == "menu")
+        if (input == "menu") // main menu always accessible
         {
+            currentScreen = Screen.MainMenu;
             ShowMainMenu();
         }
-        else if (input == "1")
+        else if (currentScreen == Screen.MainMenu)
         {
-            ContinueOption1();
+            RunMainMenu(input);
+        }
+    }
+
+    void RunMainMenu(string input)
+    {
+        if (input == "1")
+        {
+            level = 1;
+            StartGame();
         }
         else if (input == "2")
         {
-            ContinueOption2();
+            level = 2;
+            StartGame();
         }
         else if (input == "3")
         {
-            ContinueOption3();
+            level = 3;
+            StartGame();
         }
         else
         {
             Terminal.WriteLine("Please choose a valid option...");
         }
+
     }
 
-    void ContinueOption1()
+    void StartGame()
     {
+        currentScreen = Screen.Password;
         Terminal.ClearScreen();
-        Terminal.WriteLine("Raviolli raviolli show me the Formioulli!");
+        Terminal.WriteLine("You have chosen level: " + level);
         Terminal.WriteLine("");
-        Terminal.WriteLine("Enter 'menu' to return to menu");
-    }
 
-    void ContinueOption2()
-    {
-        Terminal.ClearScreen();
-        Terminal.WriteLine("Logging into Squidward's Onlyfans account...");
-        Terminal.WriteLine("");
-        Terminal.WriteLine("Enter 'menu' to return to menu");
-    }
-
-    void ContinueOption3()
-    {
-        Terminal.ClearScreen();
-        Terminal.WriteLine("Entering Mr. Crab's bank pin...");
+        if (level == 1)
+        {
+            Terminal.WriteLine("Raviolli raviolli show me the Formioulli!");
+        }
+        else if (level == 2)
+        {
+            Terminal.WriteLine("Logging into Squidward's Onlyfans account...");
+        }
+        else if (level == 3)
+        {
+            Terminal.WriteLine("Entering Mr. Crab's bank pin...");
+        }
         Terminal.WriteLine("");
         Terminal.WriteLine("Enter 'menu' to return to menu");
     }
