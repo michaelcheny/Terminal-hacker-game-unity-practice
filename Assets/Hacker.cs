@@ -28,8 +28,8 @@ public class Hacker : MonoBehaviour
     {
         currentScreen = Screen.MainMenu;
         Terminal.ClearScreen();
-        Terminal.WriteLine("Hello Master " + greeting);
-        Terminal.WriteLine("");
+        // Terminal.WriteLine("Hello Master " + greeting);
+        // Terminal.WriteLine("");
         Terminal.WriteLine("What would you like to do today?");
         Terminal.WriteLine("");
         Terminal.WriteLine("1. Hack the Krabby Patty formula.");
@@ -45,6 +45,10 @@ public class Hacker : MonoBehaviour
         {
             currentScreen = Screen.MainMenu;
             ShowMainMenu();
+        }
+        else if (input == "quit" || input == "close") {
+            Terminal.WriteLine("If on the web version, close tab.")
+            Application.Quit();
         }
         else if (currentScreen == Screen.MainMenu)
         {
@@ -126,7 +130,7 @@ public class Hacker : MonoBehaviour
        _.-'  /   \  `-._
      .' _.--|     |--._ '.
      ' _...-|     |-..._ '
-            |     |
+Logging into Squidward's Onlyfans account...|
             '.___.'
                 ");
                 break;
